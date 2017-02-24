@@ -52,8 +52,34 @@ class Client
          $new_client = new Client($client_name, $id, $stylist_id);
          array_push($clients,$new_client);
       }
-      var_dump($clients);
       return $clients;
+    }
+    static function deleteAll()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM clients;");
+    }
+
+    static function find($search_id)
+    {
+    $found_clients = null;
+    $clients = Client::getAll();
+    foreach ($clients as $client) {
+        $client_id = $client->getClientId();
+        if ($client_id == $search_id)
+        {
+            $found_clients = $client;
+        }
+    }
+    return $found_clients;
+    }
+    function update($new_name)
+    {
+        $GLOBALS['DB']->exec("UPDATE clients SET client_name = '{$new_name}' WHERE id = {$this->getClientId()};");
+        $this->setClientName($new_name);
+    }
+    function delete()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getClientId()};");
     }
 }
  ?>

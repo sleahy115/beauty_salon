@@ -49,7 +49,7 @@
             $GLOBALS['DB']->exec("DELETE FROM stylists;");
         }
         static function find($search_id)
-    {
+        {
         $found_stylist = null;
         $stylists = Stylist::getAll();
         foreach ($stylists as $stylist) {
@@ -60,7 +60,7 @@
             }
         }
         return $found_stylist;
-    }
+        }
         function update($new_name)
         {
             $GLOBALS['DB']->exec("UPDATE stylists SET stylist_name = '{$new_name}' WHERE id = {$this->getId()};");

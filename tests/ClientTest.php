@@ -46,10 +46,70 @@ class ClientTest extends PHPUnit_Framework_TestCase
        $client_test2->save();
        //Act
        $result = Client::getAll();
-       var_dump($result);
 
        //Assert
        $this->assertEmpty(false,$result);
+   }
+   function test_deleteAll()
+   {
+       //Arrange
+       Client::getAll();
+
+       //Act
+       $result = Client::deleteAll();
+
+       //Act
+       $this->assertEquals(null, $result);
+   }
+
+   function test_find()
+   {
+        //Arrange
+       $client_name = "Debbie";
+       $id = 1;
+       $stylist_id = 1;
+       $client_test = new Client($client_name, $id, $stylist_id);
+       $client_test->save();
+
+       //Act
+       $result = Client::find($client_test->getClientId());
+
+       //Act
+       $this->assertEquals($client_test, $result);
+   }
+
+   function test_update()
+   {
+       //Arrange
+      $client_name = "Debbie";
+      $new_name = "Deb";
+      $id = 1;
+      $stylist_id = 1;
+      $client_test = new Client($client_name, $id, $stylist_id);
+      $updated = $client_test->update($new_name);
+      $client_test->save();
+
+      //Act
+      $result = $client_test->update($new_name);
+      //Assert
+      $this->AssertEquals($updated, $result);
+   }
+
+   function test_delete()
+   {
+      //Arrange
+      $client_name = "Debbie";
+      $id = 1;
+      $stylist_id = 1;
+      $client_test = new Client($client_name, $id, $stylist_id);
+      $client_test->save();
+
+      //Act
+      $result = $client_test->delete();
+
+      //Assert
+      $this->assertEquals(null, $result);
+
    }
 }
  ?>

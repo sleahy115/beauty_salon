@@ -3,6 +3,7 @@
 
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Stylist.php";
+    require_once __DIR__."/../src/Client.php";
 
 
     $app = new Silex\Application();
@@ -48,6 +49,9 @@
         $stylist = Stylist::find($id);
         $stylist->delete();
         return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
+    });
+    $app->get("/stylist{id}/client_list", function() use ($app) {
+        return $app['twig']->render("client_list.html.twig", array('clients'=>Client::getAll()));
     });
 
 
