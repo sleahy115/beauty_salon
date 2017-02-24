@@ -1,0 +1,12 @@
+{% extends "stylist_list.html.twig" %}
+
+{% block body %}
+
+{{updated_stylist.getStylistName}}
+
+{% for stylist in stylists %}
+<li>{{stylist.getStylistName()}}</li>
+<a href="/update_stylist/{{stylist.getId()}}"><button type="button">Update this stylist</button></a>
+{% endfor %}
+
+{% endblock %}

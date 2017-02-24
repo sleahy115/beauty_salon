@@ -42,7 +42,6 @@
         $new_name = $_POST['new_name'];
         $stylist = Stylist::find($id);
         $stylist->update($new_name);
-        var_dump($stylist);
        return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
    });
 
