@@ -41,9 +41,10 @@ Beauty salon application, that allows a user to add and modify stylists and clie
 |  Delete all clients and stylists. | delete all |  "no clients or stylists"|
 
 ## SQL commands
-* CREATE DATABASE hair_salon
-* CREATE TABLE stylists(id serial PRIMARY KEY, stylist_name(VARCHAR(255)));
-* * CREATE TABLE clients(id serial PRIMARY KEY, stylist_name(VARCHAR(255)));
+* CREATE DATABASE hair_salon;
+* USE hair_salon;
+* CREATE TABLE stylists(id serial PRIMARY KEY, stylist_name VARCHAR(255)));
+* CREATE TABLE clients(id serial PRIMARY KEY, client_name VARCHAR(255), stylist_id INT);
 
 
 ## Support and contact details

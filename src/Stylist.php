@@ -12,7 +12,7 @@
         function setStylistName($new_name)
         {
             $this->stylist_name = $new_name;
-    
+
         }
 
         function getStylistName()
@@ -29,7 +29,7 @@
         }
         function save()
         {
-          $stylist = $GLOBALS['DB']->exec("INSERT INTO stylists (stylist_name) VALUES ('{$this->getStylistName()}');");
+          $GLOBALS['DB']->exec("INSERT INTO stylists (stylist_name) VALUES ('{$this->getStylistName()}');");
           $this->id = $GLOBALS['DB']->lastInsertId();
         }
         static function getAll()
