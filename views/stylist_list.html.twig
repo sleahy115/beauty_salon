@@ -5,8 +5,10 @@
         <title>Stylist list</title>
     </head>
     <body>
+        {% block body %}
         {% for stylist in stylists %}
         <li>{{stylist.getStylistName()}}</li>
+        <a href="/update_stylist/{{stylist.getId()}}"><button type="button">Update this stylist</button></a>
         {% endfor %}
 
         <form action="/" method="post">
@@ -14,6 +16,7 @@
             <input type="text" name="stylist_name">
             <button type="submit">Add</button>
         </form>
-
+        <a href="/delete_all"><button type="button">Delete all stylists</button></a>
+        {% endblock %}
     </body>
 </html>

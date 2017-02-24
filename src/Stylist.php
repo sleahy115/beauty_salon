@@ -69,6 +69,7 @@
         {
             $GLOBALS['DB']->exec("UPDATE stylist_name SET stylist_name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setStylistName($new_name);
+            var_dump($this->setStylistName($new_name));
         }
         function delete()
         {
