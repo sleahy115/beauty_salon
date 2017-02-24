@@ -42,10 +42,31 @@
            $stylist_test2->save();
            //Act
            $result = Stylist::getAll();
-           var_dump($result[0]);
-           var_dump($stylist_test);
 
            //Assert
            $this->assertEmpty(false,$result[1]);
+       }
+       function test_deleteAll()
+       {
+           //Arrange
+           Stylist::getAll();
+
+           //Act
+           $result = Stylist::deleteAll();
+
+           //Assert
+           $this->assertEquals(null, $result);
+       }
+
+       function test_find()
+       {
+           $stylist_name = "Debbie";
+           $id = 1;
+           $stylist_test = new Stylist($stylist_name, $id);
+           $stylist_test->save();
+
+           $result = Stylist::find($stylist_test->getId());
+
+           $this->assertEquals($stylist_test, $result);
        }
     }

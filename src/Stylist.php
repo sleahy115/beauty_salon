@@ -20,6 +20,17 @@
         {
             $this->stylist_name = $new_stylist;
         }
+        function getId()
+        {
+            return $this->id;
+        }
+
+        function setId($new_id)
+        {
+            $this->id = $new_id;
+        }
+
+
         function save()
         {
           $stylist = $GLOBALS['DB']->exec("INSERT INTO stylists (stylist_name) VALUES ('{$this->getStylistName()}');");
@@ -39,12 +50,21 @@
         }
         static function deleteAll()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM stylists;");
         }
-        function find()
-        {
-
+        static function find($search_id)
+    {
+        $found_stylist = null;
+        $stylists = Stylist::getAll();
+        foreach ($stylists as $stylist) {
+            $stylist_id = $stylist->getId();
+            if ($stylist_id == $search_id)
+            {
+                $found_stylist = $stylist;
+            }
         }
+        return $found_stylist;
+    }
         function update()
         {
 
