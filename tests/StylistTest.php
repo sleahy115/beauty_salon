@@ -54,19 +54,57 @@
            //Act
            $result = Stylist::deleteAll();
 
-           //Assert
+           //Act
            $this->assertEquals(null, $result);
        }
 
        function test_find()
        {
+            //Arrange
            $stylist_name = "Debbie";
            $id = 1;
            $stylist_test = new Stylist($stylist_name, $id);
            $stylist_test->save();
 
+           //Act
            $result = Stylist::find($stylist_test->getId());
 
+           //Act
            $this->assertEquals($stylist_test, $result);
        }
+
+       function test_update()
+       {
+           //Arrange
+          $stylist_name = "Debbie";
+          $new_name = "Deb";
+          $id = 1;
+          $stylist_test = new Stylist($stylist_name, $id);
+          $updated = $stylist_test->update($new_name);
+          $stylist_test->save();
+
+          //Act
+          $result = $stylist_test->update($new_name);
+
+          //Assert
+          $this->AssertEquals($updated, $result);
+       }
+
+       function test_delete()
+       {
+          //Arrange
+          $stylist_name = "Debbie";
+          $id = 1;
+          $stylist_test = new Stylist($stylist_name, $id);
+          $stylist_test->save();
+
+          //Act
+          $result = $stylist_test->delete();
+
+          //Assert
+          $this->assertEquals(null, $result);
+
+       }
+
+
     }
