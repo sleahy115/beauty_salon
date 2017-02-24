@@ -6,10 +6,14 @@
     </head>
     <body>
         {% block body %}
-        
+
         {% for stylist in stylists %}
         <li>{{stylist.getStylistName()}}</li>
         <a href="/update_stylist/{{stylist.getId()}}"><button type="button">Update this stylist</button></a>
+        <form action="/deleted_stylist/{{stylist.getId()}}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete this stylist</button>
+        </form>
         {% endfor %}
 
         <form action="/" method="post">
