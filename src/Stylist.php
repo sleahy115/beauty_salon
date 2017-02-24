@@ -16,9 +16,9 @@
             return $this->stylist_name;
         }
 
-        function setStylistName($new_stylist)
+        function setStylistName($new_name)
         {
-            $this->stylist_name = $new_stylist;
+            $this->stylist_name = $new_name;
         }
         function getId()
         {
@@ -67,7 +67,7 @@
     }
         function update($new_name)
         {
-            $GLOBALS['DB']->exec("UPDATE stylist_name SET stylist_name = '{$new_name}' WHERE ID = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE stylist_name SET stylist_name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setStylistName($new_name);
         }
         function delete()

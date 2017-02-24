@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Stylist list</title>
+    </head>
+    <body>
+        {% for stylist in stylists %}
+        <li>{{stylist.getStylistName()}}</li>
+        {% endfor %}
+
+        <form action="/" method="post">
+            <label for="stylist_name">Enter a new stylist</label>
+            <input type="text" name="stylist_name">
+            <button type="submit">Add</button>
+        </form>
+
+    </body>
+</html>

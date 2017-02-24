@@ -85,7 +85,6 @@
 
           //Act
           $result = $stylist_test->update($new_name);
-
           //Assert
           $this->AssertEquals($updated, $result);
        }
