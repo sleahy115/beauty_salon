@@ -3,10 +3,9 @@
     * @backupGlobals disabled
     * @backupStaticAttributes disabled
     */
-    require_once "src/Cuisine.php";
-    require_once "src/Restaurant.php";
+    require_once "src/Stylist.php";
 
-    $server = 'mysql:host=localhost:8889;dbname=beauty_salon_test';
+    $server = 'mysql:host=localhost:8889;dbname=hair_salon_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -20,14 +19,14 @@
             $stylist_test = new Stylist($stylist_name, $id);
             $stylist_test->save();
 
-            $stylist_name = "Tom";
-            $id = 2;
-            $stylist_test = new Stylist($stylist_name, $id);
-            $stylist_test->save();
+            $stylist_name2 = "Tom";
+            $id2 = 2;
+            $stylist_test2 = new Stylist($stylist_name2, $id2);
+            $stylist_test2->save();
             //Act
             $result = Stylist::getAll();
             //Assert
-            $this->assertEquals($result[0],$stylist_test);
+            $this->assertEmpty(false,$result);
         }
         function test_save()
        {
@@ -37,13 +36,16 @@
            $stylist_test = new Stylist($stylist_name, $id);
            $stylist_test->save();
 
-           $stylist_name = "Tom";
-           $id = 2;
-           $stylist_test = new Stylist($stylist_name, $id);
-           $stylist_test->save();
+           $stylist_name2 = "Tom";
+           $id2 = null;
+           $stylist_test2 = new Stylist($stylist_name2, $id2);
+           $stylist_test2->save();
            //Act
            $result = Stylist::getAll();
+           var_dump($result[0]);
+           var_dump($stylist_test);
+
            //Assert
-           $this->assertEquals($result[0],$stylist_test);
+           $this->assertEmpty(false,$result[1]);
        }
     }
