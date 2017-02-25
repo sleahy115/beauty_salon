@@ -46,7 +46,6 @@ Beauty salon application, that allows a user to add and modify stylists and clie
 * CREATE TABLE stylists(id serial PRIMARY KEY, stylist_name VARCHAR(255)));
 * CREATE TABLE clients(id serial PRIMARY KEY, client_name VARCHAR(255), stylist_id INT);
 
-
 ## Support and contact details
 no support
 
