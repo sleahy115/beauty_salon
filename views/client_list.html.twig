@@ -2,19 +2,28 @@
 
 {% block body %}
 
-{% for clients in clients %}
-<li>{{clients.getClientName()}}</li>
-<a href="/update_client/{{clients.getClientId()}}"><button type="button">Update this client</button></a>
-<form action="/deleted_client/{{clients.getClientId()}}" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <button type="submit">Delete this client</button>
-</form>
-{% endfor %}
+    {% for clients in clients %}
+        <li>{{clients.getClientName()}}</li>
+        <a href="/update_client/{{clients.getClientId()}}">
+            <button type="button">Update this client</button>
+        </a>
+        <form action="/deleted_client/{{clients.getClientId()}}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete this client</button>
+        </form>
+    {% endfor %}
 
-<form action="/stylist{{stylist.getId()}}/client_list" method="post">
-    <label for="client_name">Enter a new client</label>
-    <input type="text" name="client_name">
-    <button type="submit">Add</button>
-</form>
-<a href="/delete_all"><button type="button">Delete all clients</button></a>
+    {% if stylist != null %}
+        <form action="/stylist{{stylist.getId()}}/client_list" method="post">
+            <label for="client_name">Enter a new client</label>
+            <input type="text" name="client_name">
+            <button type="submit">Add</button>
+        </form>
+    {% endif %}
+    <a href="/delete_all">
+        <button type="button">Delete all clients</button>
+    </a>
+    <a href="/">
+        <button type="button">Home</button>
+    </a>
 {% endblock %}

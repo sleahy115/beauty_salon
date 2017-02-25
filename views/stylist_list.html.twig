@@ -6,22 +6,27 @@
     </head>
     <body>
         {% block body %}
+            {% for stylist in stylists %}
+                <a href="/stylist{{stylist.getId}}/client_list">
+                <li>{{stylist.getStylistName()}}</li>
+                <a>
+                    <a href="/update_stylist/{{stylist.getId()}}">
+                        <button type="button">Update this stylist</button>
+                    </a>
+                    <form action="/deleted_stylist/{{stylist.getId()}}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit">Delete this stylist</button>
+                    </form>
+                {% endfor %}
 
-        {% for stylist in stylists %}
-        <a href="/stylist{{stylist.getId}}/client_list"><li>{{stylist.getStylistName()}}</li></a>
-        <a href="/update_stylist/{{stylist.getId()}}"><button type="button">Update this stylist</button></a>
-        <form action="/deleted_stylist/{{stylist.getId()}}" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <button type="submit">Delete this stylist</button>
-        </form>
-        {% endfor %}
-
-        <form action="/" method="post">
-            <label for="stylist_name">Enter a new stylist</label>
-            <input type="text" name="stylist_name">
-            <button type="submit">Add</button>
-        </form>
-        <a href="/delete_all"><button type="button">Delete all stylists</button></a>
-        {% endblock %}
-    </body>
-</html>
+                <form action="/" method="post">
+                    <label for="stylist_name">Enter a new stylist</label>
+                    <input type="text" name="stylist_name">
+                    <button type="submit">Add</button>
+                </form>
+                <a href="/delete_all">
+                    <button type="button">Delete all stylists</button>
+                </a>
+            {% endblock %}
+        </body>
+    </html>
