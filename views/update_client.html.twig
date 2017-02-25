@@ -1,0 +1,14 @@
+{% extends "stylist_list.html.twig" %}
+
+{% block body %}
+
+update {{client.getClientName}}
+<form action="/updated_client/{{client.getClientId()}}" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="new_name">Enter new name for client </label>
+    <input type="text" name="new_name">
+    <button type="submit">Update</button>
+</form>
+<a href="/"><button type="button">back</button></a>
+
+{% endblock %}

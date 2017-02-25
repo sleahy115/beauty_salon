@@ -3,15 +3,15 @@
 {% block body %}
 
 {% for clients in clients %}
-<li>{{client.getClientName()}}</li>
-<a href="/update_client/{{client.getClientId()}}"><button type="button">Update this client</button></a>
-<form action="/deleted_client/{{client.getClientId()}}" method="post">
+<li>{{clients.getClientName()}}</li>
+<a href="/update_client/{{clients.getClientId()}}"><button type="button">Update this client</button></a>
+<form action="/deleted_client/{{clients.getClientId()}}" method="post">
     <input type="hidden" name="_method" value="delete">
     <button type="submit">Delete this client</button>
 </form>
 {% endfor %}
 
-<form action="/" method="post">
+<form action="/stylist{{stylist.getId()}}/client_list" method="post">
     <label for="client_name">Enter a new client</label>
     <input type="text" name="client_name">
     <button type="submit">Add</button>
