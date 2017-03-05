@@ -81,5 +81,18 @@ class Client
     {
         $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getClientId()};");
     }
+    function findByStylist($Stylist_id)
+    {
+        $found_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$stylist_id};");
+        $clients = array();
+        foreach ($found_clients as $client) {
+            $client_name = $client['client_name'];
+            $id = $client['id'];
+            $stylist_id = $client['stylist_id'];
+            $new_client = new Client($client_name, $id, $stylist_id);
+            array_push($clients,$new_client);
+          }
+        return $clients;
+    }
 }
  ?>

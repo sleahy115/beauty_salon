@@ -33,6 +33,7 @@
     $app->get("/delete_all", function() use ($app) {
         Stylist::getAll();
         Stylist::deleteAll();
+        Client::deleteAll();
      return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
     });
     $app->get("/update_stylist/{id}", function($id) use ($app) {
@@ -53,7 +54,8 @@
 
     $app->get("/stylist{id}/client_list", function($id) use ($app) {
         $stylist = Stylist::find($id);
-        return $app['twig']->render("client_list.html.twig", array('stylist'=>$stylist,'clients'=>Client::getAll()));
+        $clients = findByStylist($stylist);
+        return $app['twig']->render("client_list.html.twig", array('stylist'=>$stylist,'clients'=>$clients));
     });
     $app->post("/stylist{id}/client_list", function($id) use ($app) {
         $stylist = Stylist::find($id);
