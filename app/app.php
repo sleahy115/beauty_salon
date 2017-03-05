@@ -49,6 +49,8 @@
     $app->delete("/deleted_stylist/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->delete();
+        $clients = findByStylist($stylist);
+        $clients->delete();
         return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
     });
 
