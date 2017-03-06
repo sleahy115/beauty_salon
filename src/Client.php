@@ -86,7 +86,7 @@ class Client
     }
     return $found_clients;
     }
-    
+
     function update($new_name)
     {
         $GLOBALS['DB']->exec("UPDATE clients SET client_name = '{$new_name}' WHERE id = {$this->getClientId()};");
@@ -96,9 +96,9 @@ class Client
     {
         $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getClientId()};");
     }
-    static function findByStylist($stylist)
+    static function findByStylist($stylist_id)
     {
-        $stylist_id = $stylist->getStylistId();
+        $found_patron = $GLOBALS['DB']->query("SELECT * FROM patrons WHERE id = {$search_id};");
         $found_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$stylist_id};");
         $clients = array();
         foreach ($found_clients as $client) {

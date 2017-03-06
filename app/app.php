@@ -57,7 +57,6 @@
     $app->delete("/deleted_stylist/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
         // $clients = Client::findByStylist($stylist);
-        var_dump($clients);
         $stylist->delete();
         // $clients->delete();
         return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
@@ -65,14 +64,15 @@
 
     $app->get("/stylist{id}/client_list", function($id) use ($app) {
         $stylist = Stylist::find($id);
-        // $clients = Client::findByStylist($stylist);
         return $app['twig']->render("client_list.html.twig", array('stylist'=>$stylist,'clients'=>$clients));
     });
     $app->post("/stylist{id}/client_list", function($id) use ($app) {
         $stylist = Stylist::find($id);
         $new_client = new Client($_POST['client_name'], null , $id);
         $new_client->save();
-        return $app['twig']->render("client_list.html.twig", array('stylist'=>$stylist,'clients'=>Client::getAll()));
+        $stylist_id = $new_client->getStylistId();
+        $clients = Client::findByStylist($stylist_id);
+        return $app['twig']->render("client_list.html.twig", array('stylist'=>$stylist,'clients'=>$clients));
     });
     $app->get("/update_client/{id}", function($id) use ($app) {
         $client_found = Client::find($id);

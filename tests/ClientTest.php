@@ -125,7 +125,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
    }
 
-   function test_findByStylist()
+   function test_findStylist()
    {
      $client_name = "Debbie";
      $id = 1;
