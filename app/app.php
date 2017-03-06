@@ -49,14 +49,14 @@
     $app->delete("/deleted_stylist/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->delete();
-        $clients = findByStylist($stylist);
+        $clients = Client::findByStylist($stylist);
         $clients->delete();
         return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
     });
 
     $app->get("/stylist{id}/client_list", function($id) use ($app) {
         $stylist = Stylist::find($id);
-        $clients = findByStylist($stylist);
+        $clients = Client::findByStylist($stylist);
         return $app['twig']->render("client_list.html.twig", array('stylist'=>$stylist,'clients'=>$clients));
     });
     $app->post("/stylist{id}/client_list", function($id) use ($app) {
