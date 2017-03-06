@@ -5,7 +5,7 @@ class Client
     private $client_id;
     private $stylist_id;
 
-    function __construct($client_name, $client_id = null, $stylist_id)
+    function __construct($client_name, $client_id = null, $stylist_id = null)
     {
         $this->client_name = $client_name;
         $this->client_id = $client_id;
@@ -83,7 +83,7 @@ class Client
     }
     static function findByStylist($stylist)
     {
-        $stylist_id = $stylist->getId();
+        $stylist_id = $stylist->getStylistId();
         $found_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$stylist_id};");
         $clients = array();
         foreach ($found_clients as $client) {

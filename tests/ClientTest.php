@@ -5,7 +5,7 @@
 */
 require_once "src/Client.php";
 
-$server = 'mysql:host=localhost:8889;dbname=hair_salon_test';
+$server = 'mysql:host=localhost:8889;dbname=hair_salon';
 $username = 'root';
 $password = 'root';
 $DB = new PDO($server, $username, $password);
@@ -29,6 +29,19 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $result = Client::getAll();
         //Assert
         $this->assertEmpty(false,$result);
+    }
+
+    function test_getStylistId()
+    {
+      $client_name = "Melissa";
+      $id = 1;
+      $stylist_id = 1;
+      $client_test = new Client($client_name, $id, $stylist_id);
+      $client_test->save();
+
+      $result = $client_test->getStylistId();
+
+      $this->AssertEquals(1, $result);
     }
     function test_save()
    {
@@ -110,6 +123,30 @@ class ClientTest extends PHPUnit_Framework_TestCase
       //Assert
       $this->assertEquals(null, $result);
 
+   }
+
+   function test_findByStylist()
+   {
+     $client_name = "Debbie";
+     $id = 1;
+     $stylist_id = 1;
+     $client_test = new Client($client_name, $id, $stylist_id);
+     $client_test->save();
+
+     $client_name2 = "Tom";
+     $id2 = 2;
+     $stylist_id2 = 1;
+     $client_test2 = new Client($client_name2, $id2, $stylist_id2);
+     $client_test2->save();
+
+     $stylist_name = "Tom";
+     $id = 2;
+     $stylist_test = new Stylist($stylist_name, $id);
+     $stylist_test->save();
+
+     $result = Client::findByStylist($stylist_test);
+
+     $this->assertEquals([$client_test, $client_test2], $result);
    }
 
 }
