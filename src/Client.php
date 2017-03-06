@@ -72,6 +72,21 @@ class Client
     }
     return $found_clients;
     }
+
+    static function findStylist($search_id)
+    {
+        $found_clients = null;
+        $clients = Client::getAll();
+        foreach ($clients as $client) {
+            $stylist_id = $stylist->getStylistId();
+            if ($stylist_id == $search_id)
+            {
+                $found_clients = $client;
+            }
+    }
+    return $found_clients;
+    }
+    
     function update($new_name)
     {
         $GLOBALS['DB']->exec("UPDATE clients SET client_name = '{$new_name}' WHERE id = {$this->getClientId()};");
