@@ -12,6 +12,11 @@ $DB = new PDO($server, $username, $password);
 
 class ClientTest extends PHPUnit_Framework_TestCase
 {
+    function teardown()
+    {
+        Client::deleteAll();
+        Stylist::deleteAll();
+    }
     function test_getAll()
     {
         $client_name = "Melissa";
@@ -108,28 +113,11 @@ class ClientTest extends PHPUnit_Framework_TestCase
       $this->AssertEquals($updated, $result);
    }
 
-   function test_delete()
-   {
-      //Arrange
-      $client_name = "Debbie";
-      $id = 1;
-      $stylist_id = 1;
-      $client_test = new Client($client_name, $id, $stylist_id);
-      $client_test->save();
-
-      //Act
-      $result = $client_test->delete();
-
-      //Assert
-      $this->assertEquals(null, $result);
-
-   }
-
-   function test_findStylist()
+   function test_deleteStylist()
    {
      $client_name = "Debbie";
      $id = 1;
-     $stylist_id = 1;
+     $stylist_id = 2;
      $client_test = new Client($client_name, $id, $stylist_id);
      $client_test->save();
 
@@ -144,9 +132,10 @@ class ClientTest extends PHPUnit_Framework_TestCase
      $stylist_test = new Stylist($stylist_name, $id);
      $stylist_test->save();
 
-     $result = Client::findByStylist($stylist_test);
-
-     $this->assertEquals([$client_test, $client_test2], $result);
+     $stylist_id = $client_test->getStylistId();
+     $result = Client::deleteStylist($stylist_id);
+     var_dump($result);
+     $this->assertEquals(null, $result);
    }
 
 }

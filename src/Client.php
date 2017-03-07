@@ -96,6 +96,10 @@ class Client
     {
         $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getClientId()};");
     }
+    static function deleteStylist($stylist_id)
+    {
+        $GLOBALS['DB']->exec("DELETE FROM clients WHERE stylist_id = {$stylist_id};");
+    }
     static function findByStylist($stylist_id)
     {
         $found_patron = $GLOBALS['DB']->query("SELECT * FROM patrons WHERE id = {$search_id};");

@@ -33,6 +33,7 @@
     $app->get("/delete_all", function() use ($app) {
         Stylist::getAll();
         Stylist::deleteAll();
+        Client::getAll();
         Client::deleteAll();
      return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
     });
@@ -46,19 +47,13 @@
         $stylist->update($new_name);
         return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
     });
-    // $app->get("/deleted_stylist/{id}", function($id) use ($app) {
-    //     $stylist = Stylist::find($id);
-    //     $clients = Client::findByStylist($stylist);
-    //     var_dump($clients);
-    //     // $stylist->delete();
-    //     // $clients->delete();
-    //     return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
-    // });
+
     $app->delete("/deleted_stylist/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
-        // $clients = Client::findByStylist($stylist);
+        $stylist_id = $stylist->getId();
         $stylist->delete();
-        // $clients->delete();
+        $clients = Client::findByStylist($stylist_id);
+        Client::deleteStylist($stylist_id);
         return $app['twig']->render("stylist_list.html.twig", array('stylists'=>Stylist::getAll()));
     });
 
